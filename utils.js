@@ -104,7 +104,7 @@ const parseParams = function (args) {
 			} else {
 				errorFlag = true;
 			}
-		} else if (args[i].indexOf('-') >= 0) {
+		} else if (args[i].chartAt(0) != '-') {
 			errorFlag = true;
 		}
 

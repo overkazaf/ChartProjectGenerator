@@ -21,7 +21,7 @@
 	var APP = {
 		el : null,
 		init : function () {
-			var config = $.extends(true, {}, __defaults);
+			var config = $.extend(true, {}, __defaults);
 			APP.el = initializeChart(config);
 		},
 		fetch : function (path, callback) {
