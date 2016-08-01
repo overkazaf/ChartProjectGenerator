@@ -143,11 +143,14 @@ const buildProject = function(p) {
                 while (cnt++ < pages) {
 
                     var fnPage = function (){
-                        var pageName = pagePrefix + ~~(getIndex()/2) + '.html';
+                        var index = (getIndex()/2);
+                        var pageName = pagePrefix + ~~index + '.html';
+                        var page = page.replace(/{{APP_NAME}}/g, 'app'+index);
                         fs.writeFileSync(pageName, page);
                     };
                     var fnScript = function (){
-                        var scriptName = scriptPrefix + ~~(getIndex()/2) + '.js';
+                        var index = (getIndex()/2);
+                        var scriptName = scriptPrefix + ~~index + '.js';
                         fs.writeFileSync(scriptName, script);
                     };
 

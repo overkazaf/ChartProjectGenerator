@@ -50,7 +50,7 @@
 
 			for (var ageGroup in mMap) {
 				mData.push(mMap[ageGroup]);
-				fData.push(mMap[ageGroup]);
+				fData.push(fMap[ageGroup]);
 				mfData.push(mfMap[ageGroup]);
 			}
 

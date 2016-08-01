@@ -14,12 +14,12 @@ const printUsage = function () {
 	log('USAGE:');
 	log('\tnode app.js -d xxx -p yyy -n zzz');
 	log('PARAMETER DETAILS:');
-	log('\t-d | --dir: project directory');
-	log('\t-l | --libs: indicates all the project dependencise');
-	log('\t-p | --pages: indicates how many pages are included by this project');
-	log('\t-n | --name: project\'s name');
-	log('\t-t | --type: chart\'s type');
-	log('\t-h | --help: help infomation');
+	log('\t-d | --dir: Define directory of the project');
+	log('\t-l | --libs: Indicates all the project dependencise');
+	log('\t-p | --pages: Indicates how many pages are included by this project');
+	log('\t-n | --name: Define project\'s name');
+	log('\t-t | --type: Define chart\'s type');
+	log('\t-h | --help: Show help information');
 };
 
 // 命令参数的类型
