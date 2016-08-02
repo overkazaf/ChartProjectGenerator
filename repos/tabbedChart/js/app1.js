@@ -17,7 +17,6 @@
 			var mData = [];
 			var fData = [];
 			var mfData = [];
-
 			var mMap = {};
 			var fMap = {};
 			var mfMap = {};
@@ -273,6 +272,7 @@
 	var URLPrefix = 'http://localhost:8080';
 	var APP = {
 		el : null,
+		FileCache : {},
 		chartEls : {
 			'#chart-line' : null,
 			'#chart-bar' : null,
@@ -324,6 +324,20 @@
 				$this.addClass('active');
 				$tabContent.hide().eq(index).show();
 			});
+
+			var timeout;
+			$(window).on('resize', function () {
+				clearTimeout(timeout);
+				timeout = setTimeout(function () {
+					APP.reRender();
+				}, 500);
+			});
+		},
+		reRender : function () {
+			$('#main .tab-content').show();
+			APP.initChartEls();
+			APP.renderCharts();
+			$('.nav li.active').trigger('click');
 		},
 		initChartEls : function () {
 			var els = APP.chartEls;
@@ -339,7 +353,6 @@
 				(function (f){
 					APP.fetch(path, function (data) {
 						APP.chartElsData[f] = JSON.parse(data);
-						//console.log('APP.chartElsData['+f+']', APP.chartElsData[f]);
 						cnt++;
 					});
 				})(f);
@@ -354,16 +367,24 @@
 			fn();
 		},
 		fetch : function (path, callback) {
-			$.ajax({
-				url : path,
-				type : "GET",
-				cache : false,
-				dataType : 'text',
-				success : callback,
-				error : function () {
-					console.error(arguments);
-				}
-			});
+			if (!!APP.FileCache[path]) {
+				// 命中缓存
+				callback && callback(APP.FileCache[path]);
+			} else {
+				$.ajax({
+					url : path,
+					type : "GET",
+					cache : false,
+					dataType : 'text',
+					success : function (data) {
+						APP.FileCache[path] = data;
+						callback && callback(data);
+					},
+					error : function () {
+						console.error(arguments);
+					}
+				});
+			}
 		},
 		getChartOption : function (type, dataId) {
 			return OptionGroup[type](APP.chartElsData[dataId]);
