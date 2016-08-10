@@ -88,8 +88,6 @@ const buildProject = function(p) {
             var fnParseTemplates = function () {
             	if (!templatesReady || !scriptReady) setTimeout(fn, 50);
 
-		        //u.log('tpl:' + cache['page']);
-		        //u.log('script:' + cache['script']);
 
 		        // 4. replace chart libs and create page(s)
 
